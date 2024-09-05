@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Графики</title>
+    <style>
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+        /*Обнуление стилей*/
+
+.wrapper {
+    height: 100vh; /* Занимает 100% высоты вьюпорта */
+    width: 100vw; /* Занимает 100% ширины вьюпорта */
+    display: flex;
+    justify-content: center; /* Центрирует содержимое по горизонтали */
+    align-items: center; /* Центрирует содержимое по вертикали */
+    background-color: #191919; /* Цвет фона */
+    color: white; /* Цвет текста */
+    text-align: center;
+}
+
+@media (orientation: landscape) {
+    .wrapper {
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    body{
+        height: 100vh; /* 100% высоты экрана */
+        overflow: hidden; /* Предотвращает прокрутку */
+        background-color: #191919;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+    }
+    .main {
+        width: 100%;
+        height: 100%;
+    }
+    .sidebar {
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+    }
+    .aside {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 15%;
+    }
+    .aside-title-block {
+        padding: 10px;
+        border-bottom: 2px solid #fff;
+    }
+    .aside-title {
+
+    }
+    .aside-title-text {
+    }
+    .aside-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90%;
+        padding: 10px 10px;
+    }
+    .aside-item {
+        margin-bottom: 2vh;
+    }
+    .item-block {
+    }
+    .item-block-circl {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 5em;
+        height: 2.5em;
+    }
+    .red {
+        background: #D81111;
+    }
+
+    .green{
+        background: #3D791D;
+    }
+
+    .purple{
+        background: #6759A3;
+    }
+
+    .sky{
+        background: #229AAF;
+    }
+
+    .yellw{
+        background: #D7BE32;
+    }
+
+    .clear-color{
+        background: #881818;
+        padding: 10px;
+    }    
+
+    .item-block-sqr {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 5em;
+        height: 2em;
+    }
+    .content {
+        width: 100%;
+        padding-bottom: 10px;
+    }
+    .header {
+    }
+    .header__block {
+    }
+    .header__container {
+        display: flex;
+        justify-content: center;
+        border: 1px solid #fff;
+    }
+
+    .header__right-item  {
+        width: 100%;
+        border: 1px solid #fff;
+    }
+
+    .header__right-item h2 {
+        text-align: center;
+        padding: 9px;
+    }
+    .canvas-block {
+        width: 100%;
+        height: 85vh; /* Changed to vh for better responsiveness */
+        padding: 0px;
+    }
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+    input[type="range"] {
+    width: 97%; /* Ширина ползунка */
+    height: 5px;
+    -webkit-appearance: none; /* Убираем стандартный стиль */
+    background: #ddd; /* Цвет фона */
+    outline: none; /* Убираем границу */
+    border-radius: 5px; /* Закругленные углы */
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Убираем стандартный стиль */
+        appearance: none; /* Убираем стандартный стиль */
+        width: 20px; /* Ширина ползунка */
+        height: 20px; /* Высота ползунка */
+        background: #fff; /* Цвет ползунка */
+        border: 2px solid #bbb; /* Граница ползунка */
+        border-radius: 50%; /* Закругленные углы */
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border: 2px solid #bbb;
+        border-radius: 50%;
+    }
+
+}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <div class="sidebar">
+                <div class="aside">
+                    <div class="aside-title-block">
+                        <div class="aside-title">
+                            <h1 class="aside-title-text" id="fullScreen">
+                                Графики
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="aside-container">
+                        <div class="aside-item">
+                            <div class="item-block">
+                                <div id="btn-1" class="item-block-circl red">
+                                    <h2>1</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aside-item">
+                            <div class="item-block">
+                                <div id="btn-2" class="item-block-circl green">
+                                    <h2>2</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aside-item">
+                            <div class="item-block">
+                                <div id="btn-3" class="item-block-circl purple">
+                                    <h2>3</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aside-item">
+                            <div class="item-block">
+                                <div id="btn-4" class="item-block-circl sky">
+                                    <h2>4</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aside-item">
+                            <div class="item-block">
+                                <div id="btn-5" class="item-block-circl yellw">
+                                    <h2>5</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aside-item">
+                            <div class="item-block">
+                                <div id="btn-clear" class="item-block-sqr clear-color">
+                                    <h2>Очистить</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="header">
+                        <div class="header__block">
+                            <div class="header__container">
+                                <div class="header__right-item">
+                                    <h2 class="numberBox"><span id="rpm">0</span> Об/с</h2>
+                                </div>
+                                <div class="header__right-item">
+                                    <h2><span id="temp">0</span></h2> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="canvas-block">
+                        <canvas id="chart"></canvas>
+                        <input type="range" id="value-slider" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        alert(
+            `При запуске необходимо:
+                1) Перевернуть устройство.
+                2) Перезапустить страницу.
+                3) Нажать активировать режим полного экрана, нажатием на 
+                заголовок "Графики" в левом верхнем углу.
+            Здесь все динамически подстраивается под экран смартфона, поэтому при перевороте необходима перезагрузка, чтобы Canvas(поле для графиков) учел размеры перевернутого экрана.`
+        );
+        alert(`
+        Данная программа представляет собой веб-приложение, предназначенное для визуализации данных с помощью графиков.
+        Основные функции:
+        Графическое представление данных: 
+            Приложение позволяет строить графики на основе данных, получаемых при клике на различные кнопки, которые представляют разные серии данных. Каждый набор данных связан с определенным цветом, что позволяет пользователю различать графики.
+            Пользователь может кликать на кнопки 1-5, чтобы отправить запрос на добавление данных в соответствующий график. Каждый клик добавляет новые данные (обороты и температуру) на график.
+            Также имеется кнопка "Очистить", которая позволяет пользователю очищать все данные с графиков и возвращать их к начальному состоянию.
+            Важно соблюдать меры предосторожности с подтверждением очищения данных.
+            Полноэкранный режим: При нажатии на заголовок "Графики" активируется режим полного экрана.
+        Управление значениями с помощью ползунка: 
+            Ползунок позволяет пользователю просматривать значения на графиках по оси X, измеряющих время (или революции). При использовании ползунка обновляется отображение данных на графиках.
+        Обновление отображаемых данных: 
+            Ползунок также позволяет отобразить вертикальную линию на графике, указывающую на заданный пользователем индекс, и обновляет текст на кнопках, показывая информацию о температуре для каждой группы данных.`);
+    </script>
+    <script>
+        document.getElementById('fullScreen').addEventListener('click', function() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // Для Internet Explorer и Edge
+                document.documentElement.msRequestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Для Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Для Chrome
+                document.documentElement.webkitRequestFullscreen();
+            }
+        });
+    </script>
+    <script>
+        const canva = document.getElementById('chart'); // Получение элемента canvas 
+        const ctx = canva.getContext('2d'); // и его контекста для рисования
+        const canvasBlock = document.querySelector('.canvas-block'); // Элемент содержащий Canvas
+        const WIDTH = canvasBlock.clientWidth - 20; // Ширина Canvas
+        const HEIGHT = canvasBlock.clientHeight - 20; // Высота Canvas
+        const PADDING = 70; // Внутренние отступы графика
+        const DPI_WIDTH = WIDTH * 2; // Для плавной анимации
+        const DPI_HEIGHT = HEIGHT * 2; // 
+        const VIEW_HEIGHT = DPI_HEIGHT - PADDING * 2; // Видимая высота
+        const VIEW_WIDTH = DPI_WIDTH - PADDING * 2; // Видимая ширина
+        const ROWS_COUNT = 10; // Количество строк для Y
+        const COLS_COUNT = 19; // Количество делений для X
+        const dataPoints = {
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: []
+        };
+        const colors = {
+            1: '#D81111',
+            2: '#3D791D',
+            3: '#6759A3',
+            4: '#229AAF',
+            5: '#D7BE32'
+        };
+
+        let intervalId = null; // Для хранения идентификатора интервала
+        let previousRevolutions = new Array(6).fill(-Infinity); // Индекс 0 не используется
+
+        drawBackground(0); // Рисуем поле
+
+        function drawBackground(textFlag) {
+            canva.style.width = WIDTH + 'px'; // настройка размеров канваса 
+            canva.style.height = HEIGHT + 'px';
+            canva.width = DPI_WIDTH;
+            canva.height = DPI_HEIGHT;
+
+            const yMin = Math.min(...dataPoints[1].map(point => point[1])) - 5 || 0;
+            const yMax = Math.max(...dataPoints[1].map(point => point[1])) + 5 || 10;
+            const yRatio = VIEW_HEIGHT / (yMax - yMin);
+
+            const xMin = 500;
+            const xMax = 10000;
+            const xStep = Math.round((xMax - xMin) / COLS_COUNT);
+            const xRatio = VIEW_WIDTH / (xMax - xMin);
+
+            const stepY = VIEW_HEIGHT / ROWS_COUNT;
+
+            //ctx.clearRect(0, 0, DPI_WIDTH, DPI_HEIGHT); // Очищаем канвас перед перерисовкой
+
+            // Отрисовка оси Y
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255,255,255, 0.1)';
+            ctx.fillStyle = "white";
+            ctx.font = 'normal 1.5em Halventica, sans-serif';
+
+            for (let i = 0; i <= ROWS_COUNT; i++) {
+                const y = stepY * i;
+                if (textFlag){ctx.fillText((yMax - (yMax - yMin) / ROWS_COUNT * i).toFixed(0), 5, y + PADDING - 10);}
+                ctx.moveTo(0, y + PADDING);
+                ctx.lineTo(DPI_WIDTH, y + PADDING);
+                ctx.stroke();
+            }
+
+
+            // Отрисовка оси X
+            ctx.beginPath();
+            const stepX = VIEW_WIDTH / COLS_COUNT;
+            for (let i = 0; i <= COLS_COUNT; i++) {
+                const x = stepX * i;
+                const text = (xMin + xStep * i).toFixed(0);
+                if (textFlag){
+                // Поворот текста на 90 градусов
+                ctx.save();
+                ctx.translate(x + PADDING, DPI_HEIGHT - 10);
+                ctx.rotate(Math.PI / 2);
+                ctx.fillText(text, -45, 0); // Рисование текста
+                ctx.restore();
+                }     
+                ctx.moveTo(x + PADDING, DPI_HEIGHT - PADDING);
+                ctx.lineTo(x + PADDING, PADDING);
+                ctx.stroke();
+
+            }
+        }
+
+        document.getElementById('btn-clear').addEventListener('click', () => {
+            if (confirm("Вы уверены, что хотите очистить все данные?")) {
+                for (const key in dataPoints) {
+                    dataPoints[key] = []; // Очищаем данные для всех графиков
+                }
+                clearInterval(intervalId); // Остановить обновление данных
+                intervalId = null; // Сбросить интервал
+
+                drawBackground(0); // Перерисовываем фон графика
+                previousRevolutions = new Array(6).fill(-Infinity);
+                for (let i = 1; i <= 5; i++) {
+                    document.getElementById(`btn-${i}`).textContent = i;
+                }
+                document.getElementById('rpm').textContent = '0';
+                document.getElementById('temp').textContent = '0';
+            }
+        });
+
+
+        // Обновление графиков
+        function chart() {
+            // Очищаем холст перед добавлением новых элементов
+            ctx.clearRect(0, 0, DPI_WIDTH, DPI_HEIGHT);
+            
+            // Рисуем фон графика
+            drawBackground(1);
+
+            // Отрисовываем графики для каждого набора данных
+            for (const key in dataPoints) {
+                if (dataPoints[key].length > 0) {
+                    drawGraph(dataPoints[key], colors[key]); // Рисуем все графики
+                }
+            }
+
+            updateSliderMax(); // Обновляем максимальное значение ползунка
+        }
+
+        function drawGraph(data, color) {
+
+            const yMin = Math.min(...data.map(point => point[1])) - 5 || 0;
+            const yMax = Math.max(...data.map(point => point[1])) + 5 || 10;
+            const yRatio = VIEW_HEIGHT / (yMax - yMin);
+
+            const xMin = 500;
+            const xMax = 10000;
+            const xStep = 500; 
+            const xRatio = VIEW_WIDTH / (xMax - xMin);
+            const stepY = VIEW_HEIGHT / ROWS_COUNT;
+            
+            ctx.beginPath();
+            ctx.lineWidth = 6;
+            ctx.strokeStyle = color;
+            ctx.moveTo(PADDING + (data[0][0] - 500) * xRatio, DPI_HEIGHT - PADDING - (data[0][1] - yMin) * yRatio);
+            
+            for (const [x, y] of data) {
+                ctx.lineTo(PADDING + (x - 500) * xRatio, DPI_HEIGHT - PADDING - (y - yMin) * yRatio);
+            }
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        let minRPM = 0; // Минимальная граница оборотов
+        let maxRPM = 10000; // Максимальная граница оборотов
+        let incrementValue = 500; // Значение увеличения оборотов и температуры
+
+        function fetchValues(buttonId) {
+            // Генерация случайных значений для температур
+            const temperature = Math.floor(Math.random() * 1000); // Случайная температура от 0 до 1000
+            
+            // Добавляем новые данные только если они новые
+            if (buttonId && previousRevolutions[buttonId] < maxRPM) {
+                const revolutions = previousRevolutions[buttonId] + incrementValue;
+                
+                // Ограничение по максимальным оборотам
+                if (revolutions > maxRPM) {
+                    previousRevolutions[buttonId] = maxRPM;
+                } else {
+                    previousRevolutions[buttonId] = revolutions;
+                }
+                
+                dataPoints[buttonId].push([previousRevolutions[buttonId], temperature]);
+                
+                // Не очищаем графики, просто перерисовываем их
+                chart(); // Перерисовываем графики при добавлении новых данных
+            }
+
+            document.getElementById('rpm').textContent = previousRevolutions[buttonId].toString();
+            document.getElementById('temp').textContent = temperature.toString();
+        }
+
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`btn-${i}`).addEventListener('click', () => {
+                // Проверка, не начат ли уже этот график
+                if (previousRevolutions[i] === -Infinity) {
+                    // Установка начальных данных для революций
+                    previousRevolutions[i] = 0; // Сбросим начальное значение
+                }
+                
+                // Вызываем функцию для добавления новых данных
+                fetchValues(i);
+            });
+        }
+        const slider = document.getElementById('value-slider');
+        slider.max = 0; // Установите максимальное значение ползунка
+
+        // Обновляем значение максимума при добавлении данных
+        function updateSliderMax() {
+            const maxLength = Math.max(...Object.values(dataPoints).map(arr => arr.length)); // Получаем длину самого длинного массива данных
+            slider.max = maxLength; // Устанавливаем максимальное значение ползунка
+        }
+
+        function drawVerticalLine(index) {
+            const maxDataLength = Math.max(...Object.values(dataPoints).map(arr => arr.length));
+            
+            if (index >= 0 && index < maxDataLength) { // Проверьте, что индекс валидный
+                ctx.beginPath();
+                ctx.strokeStyle = 'white'; // Цвет линии
+                ctx.lineWidth = 4;
+
+                // Вычисление позиции по оси X ползунка
+                const xRatio = VIEW_WIDTH / (10000 - 500); 
+                for (let i = 1; i <= 5; i++) {
+                    if (dataPoints[i][index]) {
+                        var xPosition = PADDING + (dataPoints[i][index][0] - 500) * xRatio;
+                        ctx.moveTo(xPosition, PADDING);
+                        ctx.lineTo(xPosition, DPI_HEIGHT - PADDING);
+                }    
+            }   
+
+                // Рисование линии над ползунком
+                ctx.moveTo(xPosition, PADDING);
+                ctx.lineTo(xPosition, DPI_HEIGHT - PADDING);
+
+                for (let i = 1; i <= 5; i++) {
+                    if (dataPoints[i][index]) {
+                        const temperature = dataPoints[i][index][1];
+                        document.getElementById(`btn-${i}`).textContent = `${i} - Темп: ${temperature}°C`;
+                    }
+                }
+
+                ctx.stroke();
+            }
+        }
+
+        slider.addEventListener('input', (event) => {
+            const value = Number(event.target.value);
+            
+            drawBackground(0); // Перерисовываем фон графика
+            chart(); // Перерисовываем графики
+
+            drawVerticalLine(value); // Отрисовываем вертикальную линию и обновляем текст кнопок
+        });
+    </script>
+</body>
+</html>
